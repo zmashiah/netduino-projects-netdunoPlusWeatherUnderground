@@ -1,0 +1,60 @@
+=====================================================
+SGC (Serial Graphics Controller) PLATFORM OUTPUT FILE
+=====================================================
+
+*******************************************************
+* This build option is not applicable to Goldelox SGC *
+*******************************************************
+
+---------------------------------------------------------------------------------------
+File "moon 0.png" (moon 0.png)
+Sector Address 0x000000
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "moon.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+4DSL command:
+FATImage("moon.Gci", 0, 0, 0x00000000)
+
+---------------------------------------------------------------------------------------
+File "moon 1.png" (moon 1.png)
+Sector Address 0x00000A
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "moon.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x14, 0x00
+4DSL command:
+FATImage("moon.Gci", 0, 0, 0x00001400)
+
+---------------------------------------------------------------------------------------
+File "moon 2.png" (moon 2.png)
+Sector Address 0x000014
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "moon.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x28, 0x00
+4DSL command:
+FATImage("moon.Gci", 0, 0, 0x00002800)
+
+---------------------------------------------------------------------------------------
+File "moon 3.png" (moon 3.png)
+Sector Address 0x00001E
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "moon.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3C, 0x00
+4DSL command:
+FATImage("moon.Gci", 0, 0, 0x00003C00)
+

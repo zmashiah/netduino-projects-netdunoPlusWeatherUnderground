@@ -1,0 +1,160 @@
+﻿using System;
+using System.Text;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.IO.Ports;
+using System.Collections;
+
+using Microsoft.SPOT;
+using Microsoft.SPOT.Hardware;
+
+using SecretLabs.NETMF.Hardware;
+using SecretLabs.NETMF.Hardware.NetduinoPlus;
+
+using GeoTimeServices;
+using WeatherReporter.WeatherUnderground;
+
+
+
+namespace WeatherUndergroundToSerialDisplay
+{
+
+    public static class WeatherInformationReporter
+    {
+        #region Variables
+        public static DateTime startTime;
+        public static NetworkTimeProtocolService ntpService = new NetworkTimeProtocolService();
+        public static WeatherUndergroundData weatherData;
+        public static SerialPort displaySerial = new SerialPort(SerialPorts.COM2, 31250, Parity.None, 8, StopBits.One);
+        public static OutputPort onboardLed = new OutputPort(Pins.ONBOARD_LED, false);
+        public static InterruptPort onboardButton = new InterruptPort(Pins.ONBOARD_SW1, false, Port.ResistorMode.Disabled, Port.InterruptMode.InterruptEdgeLow);
+        public static bool getWeatherNow = false;
+        public static bool sendTimeNow = false;
+        public static Timer displayTimeTimer;
+        public static Timer displayWeatherTimer;
+        #endregion // Variables
+
+        #region Main
+        /// <summary>
+        /// Retrieves weather current and forecast information from Google Weather and display
+        /// it on the LCD with time ticking clock
+        /// </summary>
+        public static void Main()
+        {
+            setup();
+
+            // Loop (forever)
+            for (; ; )
+            {
+                if (getWeatherNow) // every 10 minutes
+                {
+                    onboardLed.Write(true);
+                    weatherData.Read();
+                    weatherData.Show();
+                    weatherData.Serialize(displaySerial);
+                    getWeatherNow = false;
+                    onboardLed.Write(false);
+                }
+                if (sendTimeNow)
+                {
+                    onboardLed.Write(true);
+                    serializeTime(displaySerial);
+                    sendTimeNow = false;
+                    onboardLed.Write(false);
+                }
+                Thread.Sleep(1000);
+            }
+        }
+        #endregion
+
+        #region interrupt and timer functions
+        static void onboardButtonPress(uint d1, uint d2, DateTime dt)
+        {
+            // Update both time and weather information to screen
+            getWeatherNow = true;
+            sendTimeNow = true;
+        }
+
+        static void updateDisplayTimeHandler(object src)    { sendTimeNow = true; }
+
+        static void updateWeatherHandler(object src)        { getWeatherNow = true; }
+        #endregion
+
+        #region InitFunctions
+        private static void setup()
+        {
+            // Initialization
+            displaySerial.Open();
+            Debug.EnableGCMessages(false);
+            InitLocation();
+            InitNetworkTimeProtocol();
+
+            // Set timers for updating weather and display time
+            // Time on display will be update every 3 minutes
+            // Weather will be fetched every 10 minutes
+            TimeSpan tsEveryThreeMinutes = new TimeSpan(0, 3, 0);
+            TimeSpan tsEveryTenMinutes = new TimeSpan(0, 10, 0);
+
+            displayTimeTimer = new Timer(new TimerCallback(updateDisplayTimeHandler), null, new TimeSpan(0,0,3), tsEveryThreeMinutes);
+            displayWeatherTimer = new Timer(new TimerCallback(updateWeatherHandler), null, new TimeSpan(0,0,4), tsEveryTenMinutes);
+            onboardButton.OnInterrupt += new NativeEventHandler(onboardButtonPress);
+        }
+        
+
+        private static void InitNetworkTimeProtocol()
+        {
+            ntpService.SetRefreshRate(5);
+            ntpService.begin();
+            startTime = DateTime.Now;
+            Debug.Print("Starting at: \t[" + startTime.ToString() + "]");
+        }
+
+        private static void InitLocation()
+        {
+            GeoLoactionByIP myLocation = new GeoLoactionByIP();
+            AskGeoService askGeo = new AskGeoService();
+
+            myLocation.queryLocation();
+            
+            weatherData = new WeatherUndergroundData("9d9ca34336e25c7c", myLocation.latitude, myLocation.longitude);
+
+            askGeo.queryLocation(myLocation.latitude, myLocation.longitude);
+            
+            int minutes = (int)(askGeo.currentOffserMS / 1000 / 60);
+            Debug.Print("\tCurrent (+DST) timezone offset=" + minutes + " minutes (" + (minutes / 60).ToString() + ":" + DecimalTwoPos(minutes % 60) + ")");
+            ntpService.SetTimeZoneOffset(minutes);
+        }
+
+        #endregion
+
+        #region time serialization functions
+        private static void SerializeString(SerialPort sp, string s)
+        {
+            byte[] buff = Encoding.UTF8.GetBytes(s + "\r\n");
+            sp.Write(buff, 0, buff.Length);
+        }
+
+        private static void serializeTime(SerialPort sp)
+        {
+            DateTime dt = DateTime.Now;
+
+            if (ntpService.updated)
+            {
+                Debug.Print("Updating display time: " + dt.ToString());
+                SerializeString(sp, "[T" + dt.Year + "/" + dt.Month + "/" + dt.Day + " " + dt.Hour + ":" + dt.Minute + ":" + dt.Second + "]");
+            }
+        }
+        #endregion
+
+        #region UtilityFunctions
+        private static string DecimalTwoPos(int d)
+        {
+            if (d < 10)
+                return "0" + d.ToString();
+            else
+                return d.ToString();
+        }
+        #endregion
+    }
+}

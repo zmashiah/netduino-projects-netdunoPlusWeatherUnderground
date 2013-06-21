@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphics_Composer version="2.0">
+  <item type="Properties" version="2">
+    <ResX>240</ResX>
+    <ResY>320</ResY>
+  </item>
+  <item type="Image" version="2">
+    <File>moon 0.png</File>
+    <Name>moon 0.png</Name>
+    <Updated>2012/04/11 20:25:26</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+  <item type="Image" version="2">
+    <File>moon 1.png</File>
+    <Name>moon 1.png</Name>
+    <Updated>2012/04/11 20:25:46</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+  <item type="Image" version="2">
+    <File>moon 2.png</File>
+    <Name>moon 2.png</Name>
+    <Updated>2012/04/11 20:25:59</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+  <item type="Image" version="2">
+    <File>moon 3.png</File>
+    <Name>moon 3.png</Name>
+    <Updated>2012/04/11 20:26:13</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+</graphics_Composer>

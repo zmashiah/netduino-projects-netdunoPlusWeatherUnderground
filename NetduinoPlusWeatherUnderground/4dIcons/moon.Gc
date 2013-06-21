@@ -1,0 +1,24 @@
+// Image - "moon 0.png" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: moon 0.png(x, y);
+#constant moon 0.png    $media_SetSector(0x0000, 0x0000); media_Image
+
+// Image - "moon 1.png" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: moon 1.png(x, y);
+#constant moon 1.png    $media_SetSector(0x0000, 0x000A); media_Image
+
+// Image - "moon 2.png" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: moon 2.png(x, y);
+#constant moon 2.png    $media_SetSector(0x0000, 0x0014); media_Image
+
+// Image - "moon 3.png" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: moon 3.png(x, y);
+#constant moon 3.png    $media_SetSector(0x0000, 0x001E); media_Image
+

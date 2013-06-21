@@ -1,0 +1,234 @@
+// Image - "chanceflurries.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: chanceflurries.gif(x, y);
+#constant chanceflurries.gif    $media_SetSector(0x0000, 0x0000); media_Image
+
+// Image - "chancerain.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: chancerain.gif(x, y);
+#constant chancerain.gif    $media_SetSector(0x0000, 0x000A); media_Image
+
+// Image - "chancesleet.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: chancesleet.gif(x, y);
+#constant chancesleet.gif    $media_SetSector(0x0000, 0x0014); media_Image
+
+// Image - "chancesnow.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: chancesnow.gif(x, y);
+#constant chancesnow.gif    $media_SetSector(0x0000, 0x001E); media_Image
+
+// Image - "chancetstorms.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: chancetstorms.gif(x, y);
+#constant chancetstorms.gif    $media_SetSector(0x0000, 0x0028); media_Image
+
+// Image - "clear.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: clear.gif(x, y);
+#constant clear.gif    $media_SetSector(0x0000, 0x0032); media_Image
+
+// Image - "cloudy.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: cloudy.gif(x, y);
+#constant cloudy.gif    $media_SetSector(0x0000, 0x003C); media_Image
+
+// Image - "flurries.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: flurries.gif(x, y);
+#constant flurries.gif    $media_SetSector(0x0000, 0x0046); media_Image
+
+// Image - "fog.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: fog.gif(x, y);
+#constant fog.gif    $media_SetSector(0x0000, 0x0050); media_Image
+
+// Image - "hazy.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: hazy.gif(x, y);
+#constant hazy.gif    $media_SetSector(0x0000, 0x005A); media_Image
+
+// Image - "mostlycloudy.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: mostlycloudy.gif(x, y);
+#constant mostlycloudy.gif    $media_SetSector(0x0000, 0x0064); media_Image
+
+// Image - "mostlysunny.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: mostlysunny.gif(x, y);
+#constant mostlysunny.gif    $media_SetSector(0x0000, 0x006E); media_Image
+
+// Image - "nt_chanceflurries.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_chanceflurries.gif(x, y);
+#constant nt_chanceflurries.gif    $media_SetSector(0x0000, 0x0078); media_Image
+
+// Image - "nt_chancerain.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_chancerain.gif(x, y);
+#constant nt_chancerain.gif    $media_SetSector(0x0000, 0x0082); media_Image
+
+// Image - "nt_chancesleet.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_chancesleet.gif(x, y);
+#constant nt_chancesleet.gif    $media_SetSector(0x0000, 0x008C); media_Image
+
+// Image - "nt_chancesnow.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_chancesnow.gif(x, y);
+#constant nt_chancesnow.gif    $media_SetSector(0x0000, 0x0096); media_Image
+
+// Image - "nt_chancetstorms.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_chancetstorms.gif(x, y);
+#constant nt_chancetstorms.gif    $media_SetSector(0x0000, 0x00A0); media_Image
+
+// Image - "nt_clear.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_clear.gif(x, y);
+#constant nt_clear.gif    $media_SetSector(0x0000, 0x00AA); media_Image
+
+// Image - "nt_cloudy.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_cloudy.gif(x, y);
+#constant nt_cloudy.gif    $media_SetSector(0x0000, 0x00B4); media_Image
+
+// Image - "nt_flurries.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_flurries.gif(x, y);
+#constant nt_flurries.gif    $media_SetSector(0x0000, 0x00BE); media_Image
+
+// Image - "nt_fog.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_fog.gif(x, y);
+#constant nt_fog.gif    $media_SetSector(0x0000, 0x00C8); media_Image
+
+// Image - "nt_hazy.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_hazy.gif(x, y);
+#constant nt_hazy.gif    $media_SetSector(0x0000, 0x00D2); media_Image
+
+// Image - "nt_mostlycloudy.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_mostlycloudy.gif(x, y);
+#constant nt_mostlycloudy.gif    $media_SetSector(0x0000, 0x00DC); media_Image
+
+// Image - "nt_mostlysunny.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_mostlysunny.gif(x, y);
+#constant nt_mostlysunny.gif    $media_SetSector(0x0000, 0x00E6); media_Image
+
+// Image - "nt_partlycloudy.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_partlycloudy.gif(x, y);
+#constant nt_partlycloudy.gif    $media_SetSector(0x0000, 0x00F0); media_Image
+
+// Image - "nt_partlysunny.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_partlysunny.gif(x, y);
+#constant nt_partlysunny.gif    $media_SetSector(0x0000, 0x00FA); media_Image
+
+// Image - "nt_rain.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_rain.gif(x, y);
+#constant nt_rain.gif    $media_SetSector(0x0000, 0x0104); media_Image
+
+// Image - "nt_sleet.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_sleet.gif(x, y);
+#constant nt_sleet.gif    $media_SetSector(0x0000, 0x010E); media_Image
+
+// Image - "nt_snow.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_snow.gif(x, y);
+#constant nt_snow.gif    $media_SetSector(0x0000, 0x0118); media_Image
+
+// Image - "nt_sunny.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_sunny.gif(x, y);
+#constant nt_sunny.gif    $media_SetSector(0x0000, 0x0122); media_Image
+
+// Image - "nt_tstorms.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: nt_tstorms.gif(x, y);
+#constant nt_tstorms.gif    $media_SetSector(0x0000, 0x012C); media_Image
+
+// Image - "partlycloudy.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: partlycloudy.gif(x, y);
+#constant partlycloudy.gif    $media_SetSector(0x0000, 0x0136); media_Image
+
+// Image - "partlysunny.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: partlysunny.gif(x, y);
+#constant partlysunny.gif    $media_SetSector(0x0000, 0x0140); media_Image
+
+// Image - "rain.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: rain.gif(x, y);
+#constant rain.gif    $media_SetSector(0x0000, 0x014A); media_Image
+
+// Image - "sleet.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: sleet.gif(x, y);
+#constant sleet.gif    $media_SetSector(0x0000, 0x0154); media_Image
+
+// Image - "snow.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: snow.gif(x, y);
+#constant snow.gif    $media_SetSector(0x0000, 0x015E); media_Image
+
+// Image - "sunny.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: sunny.gif(x, y);
+#constant sunny.gif    $media_SetSector(0x0000, 0x0168); media_Image
+
+// Image - "tstorms.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: tstorms.gif(x, y);
+#constant tstorms.gif    $media_SetSector(0x0000, 0x0172); media_Image
+
+// Image - "unknown.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: unknown.gif(x, y);
+#constant unknown.gif    $media_SetSector(0x0000, 0x017C); media_Image
+

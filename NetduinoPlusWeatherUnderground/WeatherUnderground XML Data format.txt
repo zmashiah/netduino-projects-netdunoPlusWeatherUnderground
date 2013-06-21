@@ -1,0 +1,45 @@
+Query Strying:
+	Sample
+		http://api.wunderground.com/api/9d9ca34336e25c7c/conditions/forecast/astronomy/q/32.0670,34.7670.xml
+	Format
+		http://api.wunderground.com/api/[KEY]/conditions/forecast/astronomy/q/[LATITUDE>,[LONGITUDE].xml
+Reply:
+<response>
+	<current_observation>
+		<observation_location>
+			<city>	City Name </city>
+		<weather>	Weathe condition </weather>
+		<temp_c>	Temperature </temp_c>
+		<relative_humidity> Humidity </relative_humidity>
+		<wind_dir>	Source of wind </wind_dir>
+		<wind_kph>	Speed of wind </wind_kph>
+		<pressure_mb>	Pressure </pressure_mb>
+		<icon>	Icon base of file name </icon>
+	<forecast>
+		<simpleforecast>
+			<forecastdays>
+				<forecastday>
+					<date>
+						<weekday_short>	DOW in short format </weekday_short>
+					<high>
+						<celsius> High Temperature </celsius>
+					<low>
+						<celsius> Low Temperature </celsius>
+					<conditions> Condition String </conditions>
+					<icon> Icon base of file name </icon>
+					<maxwind>
+						<kph> Wind speed </kph>
+						<dir> Direction of wind </dir>
+					<maxhumidity>	Humidity Forecast </maxhumidity>
+				...
+	<moon_phase>
+		<percentIlluminated> Percent of moon </percentIlluminated>
+		<sunset>
+			<hour>	Hour of sunset </hour>
+			<minute> Minute of sunset </minute>
+		<sunrise>
+			<hour>
+			<minute>
+
+				
+

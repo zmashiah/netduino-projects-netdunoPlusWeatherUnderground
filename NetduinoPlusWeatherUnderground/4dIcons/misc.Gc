@@ -1,0 +1,30 @@
+// Image - "misc0 - wundergroundLogo_4c.jpg" Size 225x135
+// Width  = 225
+// Height = 135
+// Usage: misc0 - wundergroundLogo_4c.jpg(x, y);
+#constant misc0 - wundergroundLogo_4c.jpg    $media_SetSector(0x0000, 0x0000); media_Image
+
+// Image - "misc1 - wdrop.jpg" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: misc1 - wdrop.jpg(x, y);
+#constant misc1 - wdrop.jpg    $media_SetSector(0x0000, 0x0077); media_Image
+
+// Image - "misc2 - wind_flag_storm.gif" Size 50x50
+// Width  = 50
+// Height = 50
+// Usage: misc2 - wind_flag_storm.gif(x, y);
+#constant misc2 - wind_flag_storm.gif    $media_SetSector(0x0000, 0x0081); media_Image
+
+// Image - "misc3 - wundergroundLogo_4c_small.jpg" Size 72x43
+// Width  = 72
+// Height = 43
+// Usage: misc3 - wundergroundLogo_4c_small.jpg(x, y);
+#constant misc3 - wundergroundLogo_4c_small.jpg    $media_SetSector(0x0000, 0x008B); media_Image
+
+// Image - "misc4 - baromter.gif" Size 32x32
+// Width  = 32
+// Height = 32
+// Usage: misc4 - baromter.gif(x, y);
+#constant misc4 - baromter.gif    $media_SetSector(0x0000, 0x0098); media_Image
+

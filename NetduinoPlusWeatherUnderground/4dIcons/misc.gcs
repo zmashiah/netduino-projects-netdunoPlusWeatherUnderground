@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphics_Composer version="2.0">
+  <item type="Properties" version="2">
+    <ResX>240</ResX>
+    <ResY>320</ResY>
+  </item>
+  <item type="Image" version="2">
+    <File>misc0 - wundergroundLogo_4c.jpg</File>
+    <Name>misc0 - wundergroundLogo_4c.jpg</Name>
+    <Updated>2012/04/11 11:15:02</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>225</Width>
+      <Height>135</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>225</Width>
+      <Height>135</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+  <item type="Image" version="2">
+    <File>misc1 - wdrop.jpg</File>
+    <Name>misc1 - wdrop.jpg</Name>
+    <Updated>2012/04/11 20:21:45</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+  <item type="Movie" version="2">
+    <File>misc2 - wind_flag_storm.gif</File>
+    <Name>misc2 - wind_flag_storm.gif</Name>
+    <Updated>2012/04/11 20:20:57</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>50</Width>
+      <Height>50</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <Movie>
+      <Start>0</Start>
+      <End>0</End>
+      <Frames>0</Frames>
+      <msFrame>100</msFrame>
+    </Movie>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+  <item type="Image" version="2">
+    <File>misc3 - wundergroundLogo_4c_small.jpg</File>
+    <Name>misc3 - wundergroundLogo_4c_small.jpg</Name>
+    <Updated>2012/04/11 13:25:00</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>72</Width>
+      <Height>43</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>72</Width>
+      <Height>43</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+  <item type="Movie" version="2">
+    <File>misc4 - baromter.gif</File>
+    <Name>misc4 - baromter.gif</Name>
+    <Updated>2012/04/11 20:21:57</Updated>
+    <Position>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>32</Width>
+      <Height>32</Height>
+    </Position>
+    <Source>
+      <Top>0</Top>
+      <Left>0</Left>
+      <Width>32</Width>
+      <Height>32</Height>
+    </Source>
+    <Pannable>False</Pannable>
+    <Tiled>
+      <Enabled>False</Enabled>
+    </Tiled>
+    <Movie>
+      <Start>0</Start>
+      <End>0</End>
+      <Frames>0</Frames>
+      <msFrame>1</msFrame>
+    </Movie>
+    <BitDepth>16</BitDepth>
+    <IgnoreScreensize>False</IgnoreScreensize>
+  </item>
+</graphics_Composer>

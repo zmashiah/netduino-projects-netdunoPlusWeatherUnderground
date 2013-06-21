@@ -1,0 +1,515 @@
+=====================================================
+SGC (Serial Graphics Controller) PLATFORM OUTPUT FILE
+=====================================================
+
+*******************************************************
+* This build option is not applicable to Goldelox SGC *
+*******************************************************
+
+---------------------------------------------------------------------------------------
+File "chanceflurries.gif" (chanceflurries.gif)
+Sector Address 0x000000
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00000000)
+
+---------------------------------------------------------------------------------------
+File "chancerain.gif" (chancerain.gif)
+Sector Address 0x00000A
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x14, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00001400)
+
+---------------------------------------------------------------------------------------
+File "chancesleet.gif" (chancesleet.gif)
+Sector Address 0x000014
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x28, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00002800)
+
+---------------------------------------------------------------------------------------
+File "chancesnow.gif" (chancesnow.gif)
+Sector Address 0x00001E
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3C, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00003C00)
+
+---------------------------------------------------------------------------------------
+File "chancetstorms.gif" (chancetstorms.gif)
+Sector Address 0x000028
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00005000)
+
+---------------------------------------------------------------------------------------
+File "clear.gif" (clear.gif)
+Sector Address 0x000032
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x64, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00006400)
+
+---------------------------------------------------------------------------------------
+File "cloudy.gif" (cloudy.gif)
+Sector Address 0x00003C
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x78, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00007800)
+
+---------------------------------------------------------------------------------------
+File "flurries.gif" (flurries.gif)
+Sector Address 0x000046
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x8C, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00008C00)
+
+---------------------------------------------------------------------------------------
+File "fog.gif" (fog.gif)
+Sector Address 0x000050
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0000A000)
+
+---------------------------------------------------------------------------------------
+File "hazy.gif" (hazy.gif)
+Sector Address 0x00005A
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB4, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0000B400)
+
+---------------------------------------------------------------------------------------
+File "mostlycloudy.gif" (mostlycloudy.gif)
+Sector Address 0x000064
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC8, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0000C800)
+
+---------------------------------------------------------------------------------------
+File "mostlysunny.gif" (mostlysunny.gif)
+Sector Address 0x00006E
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xDC, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0000DC00)
+
+---------------------------------------------------------------------------------------
+File "nt_chanceflurries.gif" (nt_chanceflurries.gif)
+Sector Address 0x000078
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0000F000)
+
+---------------------------------------------------------------------------------------
+File "nt_chancerain.gif" (nt_chancerain.gif)
+Sector Address 0x000082
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x04, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00010400)
+
+---------------------------------------------------------------------------------------
+File "nt_chancesleet.gif" (nt_chancesleet.gif)
+Sector Address 0x00008C
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x18, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00011800)
+
+---------------------------------------------------------------------------------------
+File "nt_chancesnow.gif" (nt_chancesnow.gif)
+Sector Address 0x000096
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x2C, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00012C00)
+
+---------------------------------------------------------------------------------------
+File "nt_chancetstorms.gif" (nt_chancetstorms.gif)
+Sector Address 0x0000A0
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x40, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00014000)
+
+---------------------------------------------------------------------------------------
+File "nt_clear.gif" (nt_clear.gif)
+Sector Address 0x0000AA
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x54, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00015400)
+
+---------------------------------------------------------------------------------------
+File "nt_cloudy.gif" (nt_cloudy.gif)
+Sector Address 0x0000B4
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x68, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00016800)
+
+---------------------------------------------------------------------------------------
+File "nt_flurries.gif" (nt_flurries.gif)
+Sector Address 0x0000BE
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x7C, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00017C00)
+
+---------------------------------------------------------------------------------------
+File "nt_fog.gif" (nt_fog.gif)
+Sector Address 0x0000C8
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x90, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00019000)
+
+---------------------------------------------------------------------------------------
+File "nt_hazy.gif" (nt_hazy.gif)
+Sector Address 0x0000D2
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xA4, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0001A400)
+
+---------------------------------------------------------------------------------------
+File "nt_mostlycloudy.gif" (nt_mostlycloudy.gif)
+Sector Address 0x0000DC
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xB8, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0001B800)
+
+---------------------------------------------------------------------------------------
+File "nt_mostlysunny.gif" (nt_mostlysunny.gif)
+Sector Address 0x0000E6
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xCC, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0001CC00)
+
+---------------------------------------------------------------------------------------
+File "nt_partlycloudy.gif" (nt_partlycloudy.gif)
+Sector Address 0x0000F0
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xE0, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0001E000)
+
+---------------------------------------------------------------------------------------
+File "nt_partlysunny.gif" (nt_partlysunny.gif)
+Sector Address 0x0000FA
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xF4, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0001F400)
+
+---------------------------------------------------------------------------------------
+File "nt_rain.gif" (nt_rain.gif)
+Sector Address 0x000104
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x08, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00020800)
+
+---------------------------------------------------------------------------------------
+File "nt_sleet.gif" (nt_sleet.gif)
+Sector Address 0x00010E
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x1C, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00021C00)
+
+---------------------------------------------------------------------------------------
+File "nt_snow.gif" (nt_snow.gif)
+Sector Address 0x000118
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x30, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00023000)
+
+---------------------------------------------------------------------------------------
+File "nt_sunny.gif" (nt_sunny.gif)
+Sector Address 0x000122
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x44, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00024400)
+
+---------------------------------------------------------------------------------------
+File "nt_tstorms.gif" (nt_tstorms.gif)
+Sector Address 0x00012C
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x58, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00025800)
+
+---------------------------------------------------------------------------------------
+File "partlycloudy.gif" (partlycloudy.gif)
+Sector Address 0x000136
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x6C, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00026C00)
+
+---------------------------------------------------------------------------------------
+File "partlysunny.gif" (partlysunny.gif)
+Sector Address 0x000140
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x80, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00028000)
+
+---------------------------------------------------------------------------------------
+File "rain.gif" (rain.gif)
+Sector Address 0x00014A
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x94, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x00029400)
+
+---------------------------------------------------------------------------------------
+File "sleet.gif" (sleet.gif)
+Sector Address 0x000154
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xA8, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0002A800)
+
+---------------------------------------------------------------------------------------
+File "snow.gif" (snow.gif)
+Sector Address 0x00015E
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xBC, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0002BC00)
+
+---------------------------------------------------------------------------------------
+File "sunny.gif" (sunny.gif)
+Sector Address 0x000168
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xD0, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0002D000)
+
+---------------------------------------------------------------------------------------
+File "tstorms.gif" (tstorms.gif)
+Sector Address 0x000172
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xE4, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0002E400)
+
+---------------------------------------------------------------------------------------
+File "unknown.gif" (unknown.gif)
+Sector Address 0x00017C
+X = 0 Y = 0 Width = 50 Height = 50 Bits = 16
+
+Display Image from Memory Card (Serial Command):
+Syntax:
+@, m, "Filename", terminator, x, y, imagePos(xhi) imagePos(hi), imagePos(mid), imagePos(lo)
+Picaso Data:
+0x40, 0x6D, "all.Gci", 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xF8, 0x00
+4DSL command:
+FATImage("all.Gci", 0, 0, 0x0002F800)
+
