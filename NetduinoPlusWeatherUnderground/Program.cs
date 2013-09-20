@@ -23,17 +23,19 @@ namespace WeatherUndergroundToSerialDisplay
     public static class WeatherInformationReporter
     {
         #region Variables
-        public static DateTime startTime;
-        public static NetworkTimeProtocolService ntpService = new NetworkTimeProtocolService();
-        public static WeatherUndergroundData weatherData;
+        private static DateTime m_startTime;
+        private static NetworkTimeProtocolService m_ntpService = new NetworkTimeProtocolService();
+        private static WeatherUndergroundData m_weatherData;
+
         //public static SerialPort displaySerial = new SerialPort(SerialPorts.COM2, 31250, Parity.None, 8, StopBits.One);
-        public static SerialDisplay displaySerial = new SerialDisplay(SerialPorts.COM2, 9600);
+        public static SerialDisplay m_displaySerial = new SerialDisplay(SerialPorts.COM2, 9600);
         public static InterruptPort onboardButton = new InterruptPort(Pins.ONBOARD_SW1, false, Port.ResistorMode.Disabled, Port.InterruptMode.InterruptEdgeLow);
         public static OutputPort onboardLed = new OutputPort(Pins.ONBOARD_LED, false);
-        public static bool getWeatherNow = false;
-        public static bool sendTimeNow = false;
-        public static Timer displayTimeTimer;
-        public static Timer displayWeatherTimer;
+
+        public static bool m_getWeatherNow = false;
+        public static bool m_sendTimeNow = false;
+        public static Timer m_displayTimeTimer;
+        public static Timer m_displayWeatherTimer;
         #endregion // Variables
 
         #region Main
@@ -48,20 +50,20 @@ namespace WeatherUndergroundToSerialDisplay
             // Loop (forever)
             for (; ; )
             {
-                if (getWeatherNow) // every 10 minutes
+                if (m_getWeatherNow) // every 10 minutes
                 {
                     onboardLed.Write(true);
-                    weatherData.Read();
-                    weatherData.Show();
-                    weatherData.Serialize(displaySerial);
-                    getWeatherNow = false;
+                    m_weatherData.Read();
+                    m_weatherData.Show();
+                    m_weatherData.Serialize(m_displaySerial);
+                    m_getWeatherNow = false;
                     onboardLed.Write(false);
                 }
-                if (sendTimeNow)
+                if (m_sendTimeNow)
                 {
                     onboardLed.Write(true);
                     serializeTime();
-                    sendTimeNow = false;
+                    m_sendTimeNow = false;
                     onboardLed.Write(false);
                 }
                 Thread.Sleep(1000);
@@ -73,26 +75,28 @@ namespace WeatherUndergroundToSerialDisplay
         static void onboardButtonPress(uint d1, uint d2, DateTime dt)
         {
             // Update both time and weather information to screen
-            getWeatherNow = true;
-            sendTimeNow = true;
+            m_getWeatherNow = true;
+            m_sendTimeNow = true;
         }
 
-        static void updateDisplayTimeHandler(object src)    { sendTimeNow = true; }
+        static void updateDisplayTimeHandler(object src)    { m_sendTimeNow = true; }
 
-        static void updateWeatherHandler(object src)        { getWeatherNow = true; }
+        static void updateWeatherHandler(object src)        { m_getWeatherNow = true; }
         #endregion
 
         #region InitFunctions
         private static void setup()
         {
             // Initialization
-            displaySerial.Open();
+            m_displaySerial.Open();
             Debug.EnableGCMessages(false);
+
             InitLocation();
+            
             // Start the NTP
-            ntpService.SetRefreshRate(5);
-            ntpService.begin();
-            startTime = DateTime.Now;
+            m_ntpService.SetRefreshRate(5);
+            m_ntpService.begin();
+            m_startTime = DateTime.Now;
 
             // Set timers for updating weather and display time
             // Time on display will be update every 3 minutes
@@ -100,8 +104,8 @@ namespace WeatherUndergroundToSerialDisplay
             TimeSpan tsEveryThreeMinutes = new TimeSpan(0, 3, 0);
             TimeSpan tsEveryTenMinutes = new TimeSpan(0, 10, 0);
 
-            displayTimeTimer = new Timer(new TimerCallback(updateDisplayTimeHandler), null, new TimeSpan(0,0,3), tsEveryThreeMinutes);
-            displayWeatherTimer = new Timer(new TimerCallback(updateWeatherHandler), null, new TimeSpan(0,0,4), tsEveryTenMinutes);
+            m_displayTimeTimer = new Timer(new TimerCallback(updateDisplayTimeHandler), null, new TimeSpan(0,0,3), tsEveryThreeMinutes);
+            m_displayWeatherTimer = new Timer(new TimerCallback(updateWeatherHandler), null, new TimeSpan(0,0,4), tsEveryTenMinutes);
             onboardButton.OnInterrupt += new NativeEventHandler(onboardButtonPress);
         }
         
@@ -109,18 +113,21 @@ namespace WeatherUndergroundToSerialDisplay
         
         private static void InitLocation()
         {
-            GeoLoactionByIP myLocation = new GeoLoactionByIP();
+            //GeoLoactionByIP myLocation = new GeoLoactionByIP();
             AskGeoService askGeo = new AskGeoService();
 
-            myLocation.queryLocation();
+            //myLocation.queryLocation();
             
-            weatherData = new WeatherUndergroundData("9d9ca34336e25c7c", myLocation.latitude, myLocation.longitude);
+            //m_weatherData = new WeatherUndergroundData("9d9ca34336e25c7c", myLocation.latitude, myLocation.longitude);
+            string lat = "32.1833"; // "32.0667";
+            string longi = "34.8667";// "34.7667";
+            //askGeo.queryLocation(myLocation.latitude, myLocation.longitude);
+            askGeo.queryLocation(lat, longi);
+            m_weatherData = new WeatherUndergroundData("9d9ca34336e25c7c", lat, longi);
 
-            askGeo.queryLocation(myLocation.latitude, myLocation.longitude);
-            
             int minutes = (int)(askGeo.currentOffserMS / 1000 / 60);
-            Debug.Print("\tTimezone offset (+DST)=" + minutes + " minutes");
-            ntpService.SetTimeZoneOffset(minutes);
+            Debug.Print("\tTZ offset(+DST)=" + minutes + " minutes");
+            m_ntpService.SetTimeZoneOffset(minutes);
         }
 
         #endregion
@@ -128,14 +135,14 @@ namespace WeatherUndergroundToSerialDisplay
         #region time serialization functions
         private static void serializeTime()
         {
-            if (ntpService.LastUpdteOK() == false)
-                ntpService.DoUpdate(); // If last time we failed, retry...
+            if (m_ntpService.LastUpdteOK() == false)
+                m_ntpService.DoUpdate(); // If last time we failed, retry...
 
             DateTime dt = DateTime.Now;
-            if (ntpService.HasValidDateAndTime())
+            if (m_ntpService.HasValidDateAndTime())
             {
-                Debug.Print("Updating display time: " + dt.ToString());
-                displaySerial.SerializeString("[T" + dt.Year + "/" + dt.Month + "/" + dt.Day + " " + dt.Hour + ":" + dt.Minute + ":" + dt.Second + "]");
+                Debug.Print("Send time 2 disp: " + dt.ToString());
+                m_displaySerial.SerializeString("[T" + dt.Year + "/" + dt.Month + "/" + dt.Day + " " + dt.Hour + ":" + dt.Minute + ":" + dt.Second + "]");
             }
         }
         #endregion

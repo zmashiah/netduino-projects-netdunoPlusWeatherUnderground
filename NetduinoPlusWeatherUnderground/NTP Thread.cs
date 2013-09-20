@@ -51,236 +51,23 @@ using ZakieM.XMLParserHelper;
 
 namespace GeoTimeServices
 {
-    public class GeoLoactionByIP
-    {
-        public enum glParserState
-        {
-            glStart = 0,
-            glInfo = 1
-        }
-
-        public string country;
-        public string region;
-        public string city;
-        public string latitude;
-        public string longitude;
-        public string externalIPAddress;
-        private glParserState currentState;
-
-        private string queryString 
-        {
-            get { return "http://www.geobytes.com/IpLocator.htm?GetLocation&Template=XML.txt"; }
-        }
-
-        
-
-        /// <summary>
-        /// Reads the stream of reply from the geobytes and parses it into the variables
-        /// </summary>
-        /// <param name="s">the stream of the reply</param>
-        private void _ProcessLine(string line)
-        {
-            const string _info = "info";
-            const string _country = "country";
-            const string _region = "region";
-            const string _city = "city";
-            const string _latitude = "latitude";
-            const string _longitude = "longitude";
-            const string _ipaddress = "ipaddress";
-
-            switch (currentState)
-            {
-                case glParserState.glStart:
-                    if (line.IndexOf(XMLParserHelper.startTag(_info)) >= 0)
-                        currentState = glParserState.glInfo;
-                    break;
-                case glParserState.glInfo:
-                    if (line.IndexOf(XMLParserHelper.startTag(_country)) >= 0)
-                        this.country = XMLParserHelper.getData(line, _country);
-                    else
-                        if (line.IndexOf(XMLParserHelper.startTag(_region)) >= 0)
-                            this.region = XMLParserHelper.getData(line, _region);
-                        else
-                            if (line.IndexOf(XMLParserHelper.startTag(_city)) >= 0)
-                                this.city = XMLParserHelper.getData(line, _city);
-                            else
-                                if (line.IndexOf(XMLParserHelper.startTag(_latitude)) >= 0)
-                                    this.latitude = XMLParserHelper.getData(line, _latitude);
-                                else
-                                    if (line.IndexOf(XMLParserHelper.startTag(_longitude)) >= 0)
-                                        this.longitude = XMLParserHelper.getData(line, _longitude);
-                                    else
-                                        if (line.IndexOf(XMLParserHelper.startTag(_ipaddress)) >= 0)
-                                            this.externalIPAddress = XMLParserHelper.getData(line, _ipaddress);
-                                        else
-                                        {
-                                            if (line.IndexOf(XMLParserHelper.endTag(_info)) >= 0)
-                                                currentState = glParserState.glStart;
-                                        }
-                    break;
-            }
-        }
-        
-
-
-        private void _readStream(Stream s)
-        {
-            string parser = string.Empty;
-            byte[] buffer = new byte[2];
-            int bytesRead = 0;
-            bool endOfStreamReached = false;
-
-            Debug.Print("GL:: Reading @" + DateTime.Now.ToString());
-            System.GC.WaitForPendingFinalizers();
-            Debug.GC(true);
-
-            while (endOfStreamReached == false)
-            {
-                try
-                {
-                    int c = s.Read(buffer, 0, 1);
-                    if (c > 0)
-                    {
-                        bytesRead++;
-                        if ((buffer[0] != 10))
-                            parser += (char)buffer[0];
-                        else
-                        {
-                            _ProcessLine(parser);
-                            parser = string.Empty;
-                        }
-                    }
-                    else
-                        endOfStreamReached = true;
-                }
-                catch (Exception e)
-                {
-                    Debug.Print("GL:: Error reading: " + e.Message);
-                    GC.WaitForPendingFinalizers();
-                    Debug.GC(true);
-                    return;
-                }
-            }
-
-            Debug.Print("GL:: Done @" + DateTime.Now.ToString());
-            GC.WaitForPendingFinalizers();
-            Debug.GC(true);
-        }
-
-        /// <summary>
-        /// Queries the Geobytes service for location of the IP address.
-        /// </summary>
-        /// <param name="ip"></param>
-        public void queryLocation(string ip = null)
-        {
-            string q = (ip == null) ? queryString : queryString + ip;
-            HttpWebRequest request = HttpWebRequest.Create(q) as HttpWebRequest;
-            request.UserAgent = ".NETMF";
-            WebResponse resp = null;
-
-            try
-            {
-                resp = request.GetResponse();
-            }
-            catch (Exception e)
-            {
-                Debug.Print("ERROR: Exception for geobytes.com" + e.ToString());
-            }
-
-            if (resp != null)
-            {
-                Stream respStream = resp.GetResponseStream();
-                respStream.ReadTimeout = 5000;
-                _readStream(respStream);
-                resp.Close();
-                resp.Dispose();
-            }
-            request.Dispose();
-        }
-
-    }
-
-
-
-
-
-    public class AskGeoService
-    {
-        public long currentOffserMS;
-
-        private const string accountID = "32";                 // <<<< Put up your account ID, PLEASE!
-        private const string apiKey = "1qoio30dtb5gdu7lr00i9saar4jb4fro65hbarruif6i39vrdace"; // <<<< Put here your API key, PLEASE!
-        private string queryString(string latitude, string longitude)
-        {
-            return "http://api.askgeo.com/v1/" + accountID + "/" + apiKey + "/query.json?databases=TimeZone&points=" + latitude + "," + longitude;
-        }
-
-
-        public void queryLocation(string latitude, string longitude)
-        {
-            string q = queryString(latitude, longitude);
-
-            Debug.Print("AG:: Reading @" + DateTime.Now.ToString());
-            HttpWebRequest request = HttpWebRequest.Create(q) as HttpWebRequest;
-            WebResponse resp = null;
-
-            try
-            {
-                resp = request.GetResponse();
-            }
-            catch (Exception e)
-            {
-                Debug.Print("ERROR: Exception for askgeo.com" + e.ToString());
-            }
-
-            if (resp != null)
-            {
-                Stream respStream = resp.GetResponseStream();
-                respStream.ReadTimeout = 5000;
-
-                System.Threading.Thread.Sleep(1000); // Wait a while
-                StreamReader sr = new StreamReader(respStream);
-                string parser = sr.ReadToEnd();
-                int location;
-
-                location = parser.IndexOf("CurrentOffsetMs\":");
-                if (location > 0)
-                {
-                    parser = parser.Substring(location);
-                    int start = parser.IndexOf(':') + 1;
-                    location = parser.IndexOf(',');
-                    string currentOffsetMsString = parser.Substring(start, location - start);
-
-                    currentOffserMS = Convert.ToInt32(currentOffsetMsString);
-                }
-                resp.Close();
-            }
-            request.Dispose();
-            Debug.Print("AG:: Done @" + DateTime.Now.ToString());
-        }
-    }
-
-
-
-
-
     public class NetworkTimeProtocolService
     {
         #region Variables
-        private int sleepTime = 60 * 10; // Every 10 hours by default
-        private string ntpName = "time-a.nist.gov";
-        private int minutesFromGMT;
-        private Timer ntpSyncTimer;
-        private bool _hasValidDateTime = false;
-        private bool _lastUpdateOK = false;
-        private bool _updateRunning = false;
+        private int m_sleepTime = 60 * 10; // Every 10 hours by default
+        private string m_ntpName = "time-a.nist.gov";
+        private int m_minutesFromGMT;
+        private Timer m_ntpSyncTimer;
+        private bool m_hasValidDateTime = false;
+        private bool m_lastUpdateOK = false;
+        private bool m_updateRunning = false;
         #endregion
         
 
         #region PrivateFunctions
         private bool ntpTimeUpdater(int retries = 1)
         {
-            _updateRunning = true;
+            m_updateRunning = true;
             int i;
             DateTime dtBefore = DateTime.Now;
 
@@ -289,42 +76,42 @@ namespace GeoTimeServices
             {
                 DateTime dt = GetNetworkTime();
                 
-                _lastUpdateOK = (dt.Year > 2011) && (dt.Year < 2100);
-                if (_lastUpdateOK)
+                m_lastUpdateOK = (dt.Year > 2011) && (dt.Year < 2100);
+                if (m_lastUpdateOK)
                 {
-                    _hasValidDateTime = true;
+                    m_hasValidDateTime = true;
                     SetSystemTime(dt);
                     TimeSpan ts = dt - dtBefore;
                     Debug.Print("NTP:: Delta is: " + ts.Milliseconds.ToString());
                     break;
                 }
             }
-            _updateRunning = false;
-            return _lastUpdateOK;
+            m_updateRunning = false;
+            return m_lastUpdateOK;
 
         }
         
         private void ntpTimerCallback(object src)
         {
-            if (_updateRunning == false)
+            if (m_updateRunning == false)
                 ntpTimeUpdater(3);
         }
 
         private void SetSystemTime(DateTime dt)
         {
-            TimeSpan timezoneOffset = TimeSpan.FromTicks(minutesFromGMT * TimeSpan.TicksPerMinute);
+            TimeSpan timezoneOffset = TimeSpan.FromTicks(m_minutesFromGMT * TimeSpan.TicksPerMinute);
             dt += timezoneOffset;
             Utility.SetLocalTime(dt);
         }
         #endregion
 
         #region PublicFunctions
-        public void SetRefreshRate(int hoursForRefresh) { sleepTime = hoursForRefresh * 60; }
+        public void SetRefreshRate(int hoursForRefresh) { m_sleepTime = hoursForRefresh * 60; }
         //public void SetNTPHost(string host) { ntpName = host; }
-        public int GetTimeZoneOffset() { return minutesFromGMT; }
-        public void SetTimeZoneOffset(int minutes_from_GMT) { minutesFromGMT = minutes_from_GMT; }
-        public bool HasValidDateAndTime() { return _hasValidDateTime; }
-        public bool LastUpdteOK() { return _lastUpdateOK; }
+        public int GetTimeZoneOffset() { return m_minutesFromGMT; }
+        public void SetTimeZoneOffset(int minutes_from_GMT) { m_minutesFromGMT = minutes_from_GMT; }
+        public bool HasValidDateAndTime() { return m_hasValidDateTime; }
+        public bool LastUpdteOK() { return m_lastUpdateOK; }
 
         public DateTime GetNetworkTime()
         {
@@ -333,7 +120,7 @@ namespace GeoTimeServices
 
             try
             {
-                EndPoint ep = new IPEndPoint(Dns.GetHostEntry(ntpName).AddressList[0], 123);
+                EndPoint ep = new IPEndPoint(Dns.GetHostEntry(m_ntpName).AddressList[0], 123);
                 s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
                 s.Connect(ep);
@@ -373,19 +160,19 @@ namespace GeoTimeServices
 
         public bool DoUpdate()
         {
-            _lastUpdateOK = ntpTimeUpdater(3);
-            return _lastUpdateOK;
+            m_lastUpdateOK = ntpTimeUpdater(3);
+            return m_lastUpdateOK;
         }
         
         public void begin()
         {
-            Debug.Print("NTP:: Starting...\n\tServer\t" + ntpName + "\n\tevery\t" + sleepTime.ToString() + " minutes");
+            Debug.Print("NTP:: Starting...\n\tServer\t" + m_ntpName + "\n\tevery\t" + m_sleepTime.ToString() + " minutes");
 
             // Now we want to see at least once that the system time gets updated
             DoUpdate();
             // Install timer to sync time every 'sleepTime' minutes
-            TimeSpan ts = new TimeSpan(0, sleepTime, 0);
-            ntpSyncTimer = new Timer(new TimerCallback(ntpTimerCallback), null, new TimeSpan(1000), ts);
+            TimeSpan ts = new TimeSpan(0, m_sleepTime, 0);
+            m_ntpSyncTimer = new Timer(new TimerCallback(ntpTimerCallback), null, new TimeSpan(1000), ts);
         }
         #endregion
     } // End of NTP  class

@@ -31,6 +31,7 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
+    <Compile Include="AskGeoService.cs" />
     <Compile Include="SerialDisplay.cs" />
     <Compile Include="XMLParserHelper.cs" />
     <Compile Include="NTP Thread.cs" />

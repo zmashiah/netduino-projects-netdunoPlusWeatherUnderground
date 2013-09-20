@@ -64,49 +64,54 @@ namespace WeatherReporter.WeatherUnderground
 
     public class WeatherUndergroundData
     {
-        public WeatherUndergroundCurrent current = new WeatherUndergroundCurrent();
-        public ArrayList forecast = new ArrayList();
-        public WeatherUndergroundMoonPhase astronomy = new WeatherUndergroundMoonPhase();
+        public WeatherUndergroundCurrent m_current;
+        public WeatherUndergroundMoonPhase m_astronomy;
+        public ArrayList m_forecast;
         
-        private WeatherUndergroundForecast wuf;
+        private WeatherUndergroundForecast m_wuf;
 
-        private string queryKey;
-        private string latitude;
-        private string longitude;
+        private string m_queryKey;
+        private string m_latitude;
+        private string m_longitude;
 
 
-        public enum wuParserState
+        public enum WU_ParserState
         {
-            wuStart = 0,
-            wuResponse = 1,
-            wuCurrentObservation = 10,
-            wuObservationLocation = 100,
-            wuForecast = 20,
-            wuSimpleForecast = 21,
-            wuForecastDays = 210,
-            wuForecastDay = 2100,
-            wuDate = 21000,
-            wuHigh = 21001,
-            wuLow = 21002,
-            wuMaxWind = 21003,
-            wuMoonPhase = 30,
-            wuSunset = 300,
-            wuSunrise = 301
+            Start = 0,
+            Response = 1,
+            CurrentObservation = 10,
+            ObservationLocation = 100,
+            Forecast = 20,
+            SimpleForecast = 21,
+            ForecastDays = 210,
+            ForecastDay = 2100,
+            Date = 21000,
+            High = 21001,
+            Low = 21002,
+            MaxWind = 21003,
+            MoonPhase = 30,
+            Sunset = 300,
+            Sunrise = 301
         }
-        
-        private wuParserState  currentState;
+
+        private WU_ParserState m_currentState;
                 
 
         public WeatherUndergroundData(string key, string lat, string longi)
         {
-            queryKey = key;
-            latitude = lat;
-            longitude = longi;
+            m_queryKey = key;
+            m_latitude = lat;
+            m_longitude = longi;
+
+            m_current = new WeatherUndergroundCurrent();
+            m_astronomy = new WeatherUndergroundMoonPhase();
+            m_forecast = new ArrayList();
         }
         
         private string queryString
         {
-            get { return "http://api.wunderground.com/api/" + queryKey + "/conditions/forecast/astronomy/q/" + latitude + "," + longitude + ".xml"; }
+            get { return "http://api.wunderground.com/api/" + m_queryKey +
+                "/conditions/forecast/astronomy/q/" + m_latitude + "," + m_longitude + ".xml"; }
         }
 
         
@@ -145,180 +150,179 @@ namespace WeatherReporter.WeatherUnderground
             const string _hour = "hour";
             const string _minute = "minute";
 
-            switch (currentState)
+            switch (m_currentState)
             {
-                case wuParserState.wuStart:
-                    // Look for the <response>
-                    if (line.IndexOf(XMLParserHelper.startTag(_response)) >= 0)
-                        currentState = wuParserState.wuResponse;
+                case WU_ParserState.Start: // Look for the <response>
+                    if (XMLParserHelper.amAtTag(line, _response))
+                        m_currentState = WU_ParserState.Response;
                     break;
-                case wuParserState.wuResponse:
-                    if (line.IndexOf(XMLParserHelper.startTag(_current_observation)) >= 0)
-                        currentState = wuParserState.wuCurrentObservation;
+                case WU_ParserState.Response:
+                    if (XMLParserHelper.amAtTag(line, _current_observation))
+                        m_currentState = WU_ParserState.CurrentObservation;
                     else
-                        if (line.IndexOf(XMLParserHelper.startTag(_forecast)) >= 0)
-                            currentState = wuParserState.wuForecast;
+                        if (XMLParserHelper.amAtTag(line, _forecast))
+                            m_currentState = WU_ParserState.Forecast;
                         else
-                            if (line.IndexOf(XMLParserHelper.startTag(_moon_phase)) >= 0)
-                                currentState = wuParserState.wuMoonPhase;
+                            if (XMLParserHelper.amAtTag(line, _moon_phase))
+                                m_currentState = WU_ParserState.MoonPhase;
                             else
-                                if (line.IndexOf(XMLParserHelper.endTag(_response)) >= 0)
-                                    currentState = wuParserState.wuStart;
+                                if (XMLParserHelper.amAtEndTag(line, _response))
+                                    m_currentState = WU_ParserState.Start;
                     break;
-                case wuParserState.wuCurrentObservation:
-                    if (line.IndexOf(XMLParserHelper.startTag(_observation_location)) >= 0)
-                        currentState = wuParserState.wuObservationLocation;
+                case WU_ParserState.CurrentObservation:
+                    if (XMLParserHelper.amAtTag(line, _observation_location))
+                        m_currentState = WU_ParserState.ObservationLocation;
                     else
-                        if (line.IndexOf(XMLParserHelper.startTag(_weather)) >= 0)
-                            this.current.condition = XMLParserHelper.getData(line, _weather);
+                        if (XMLParserHelper.amAtTag(line, _weather))
+                            this.m_current.condition = XMLParserHelper.getData(line, _weather);
                         else
-                            if (line.IndexOf(XMLParserHelper.startTag(_temp_c)) >= 0)
-                                this.current.temperature = XMLParserHelper.getData(line, _temp_c);
+                            if (XMLParserHelper.amAtTag(line, _temp_c))
+                                this.m_current.temperature = XMLParserHelper.getData(line, _temp_c);
                             else
-                                if (line.IndexOf(XMLParserHelper.startTag(_relative_humidity)) >= 0)
-                                    this.current.humidity = XMLParserHelper.getData(line, _relative_humidity);
+                                if (XMLParserHelper.amAtTag(line, _relative_humidity))
+                                    this.m_current.humidity = XMLParserHelper.getData(line, _relative_humidity);
                                 else
-                                    if (line.IndexOf(XMLParserHelper.startTag(_wind_dir)) >= 0)
-                                        this.current.windDir = XMLParserHelper.getData(line, _wind_dir);
+                                    if (XMLParserHelper.amAtTag(line, _wind_dir))
+                                        this.m_current.windDir = XMLParserHelper.getData(line, _wind_dir);
                                     else
-                                        if (line.IndexOf(XMLParserHelper.startTag(_wind_kph)) >= 0)
-                                            this.current.windSpeed = XMLParserHelper.getData(line, _wind_kph);
+                                        if (XMLParserHelper.amAtTag(line, _wind_kph))
+                                            this.m_current.windSpeed = XMLParserHelper.getData(line, _wind_kph);
                                         else
-                                            if (line.IndexOf(XMLParserHelper.startTag(_pressure_mb)) >= 0)
-                                                this.current.pressure = XMLParserHelper.getData(line, _pressure_mb);
+                                            if (XMLParserHelper.amAtTag(line, _pressure_mb))
+                                                this.m_current.pressure = XMLParserHelper.getData(line, _pressure_mb);
                                             else
-                                                if (line.IndexOf(XMLParserHelper.startTag(_icon)) >= 0)
-                                                    this.current.iconBasename = XMLParserHelper.getData(line, _icon);
+                                                if (XMLParserHelper.amAtTag(line, _icon))
+                                                    this.m_current.iconBasename = XMLParserHelper.getData(line, _icon);
                                                 else
-                                                    if (line.IndexOf(XMLParserHelper.endTag(_current_observation)) >= 0)
-                                                        currentState = wuParserState.wuResponse;
+                                                    if (XMLParserHelper.amAtEndTag(line, _current_observation))
+                                                        m_currentState = WU_ParserState.Response;
                     break;
-                case wuParserState.wuObservationLocation:
-                    if (line.IndexOf(XMLParserHelper.startTag(_city)) >= 0)
-                        this.current.city = XMLParserHelper.getData(line, _city);
+                case WU_ParserState.ObservationLocation:
+                    if (XMLParserHelper.amAtTag(line, _city))
+                        this.m_current.city = XMLParserHelper.getData(line, _city);
                     else
-                        if (line.IndexOf(XMLParserHelper.endTag(_observation_location)) >= 0)
-                            currentState = wuParserState.wuCurrentObservation;
+                        if (XMLParserHelper.amAtEndTag(line, _observation_location))
+                            m_currentState = WU_ParserState.CurrentObservation;
                     break;
-                case wuParserState.wuForecast:
-                    if (line.IndexOf(XMLParserHelper.startTag(_simpleforecast)) >= 0)
-                        currentState = wuParserState.wuSimpleForecast;
+                case WU_ParserState.Forecast:
+                    if (XMLParserHelper.amAtTag(line, _simpleforecast))
+                        m_currentState = WU_ParserState.SimpleForecast;
                     else
-                        if (line.IndexOf(XMLParserHelper.endTag(_forecast)) >= 0)
-                            currentState = wuParserState.wuResponse;
+                        if (XMLParserHelper.amAtEndTag(line, _forecast))
+                            m_currentState = WU_ParserState.Response;
                     break;
-                case wuParserState.wuSimpleForecast:
-                    if (line.IndexOf(XMLParserHelper.startTag(_forecastdays)) >= 0)
+                case WU_ParserState.SimpleForecast:
+                    if (XMLParserHelper.amAtTag(line, _forecastdays))
                     {
-                        currentState = wuParserState.wuForecastDays;
-                        this.forecast.Clear();
+                        m_currentState = WU_ParserState.ForecastDays;
+                        this.m_forecast.Clear();
                     }
                     else
-                        if (line.IndexOf(XMLParserHelper.endTag(_simpleforecast)) >= 0)
-                            currentState = wuParserState.wuForecast;
+                        if (XMLParserHelper.amAtEndTag(line, _simpleforecast))
+                            m_currentState = WU_ParserState.Forecast;
                     break;
-                case wuParserState.wuForecastDays:
-                    if (line.IndexOf(XMLParserHelper.startTag(_forecastday)) >= 0)
+                case WU_ParserState.ForecastDays:
+                    if (XMLParserHelper.amAtTag(line, _forecastday))
                     {
-                        currentState = wuParserState.wuForecastDay;
-                        wuf = new WeatherUndergroundForecast();
+                        m_currentState = WU_ParserState.ForecastDay;
+                        m_wuf = new WeatherUndergroundForecast();
                     }
                     else
-                        if (line.IndexOf(XMLParserHelper.endTag(_forecastdays)) >= 0)
-                            currentState = wuParserState.wuSimpleForecast;
+                        if (XMLParserHelper.amAtEndTag(line, _forecastdays))
+                            m_currentState = WU_ParserState.SimpleForecast;
                     break;
-                case wuParserState.wuForecastDay:
-                    if (line.IndexOf(XMLParserHelper.startTag(_date)) >= 0)
-                        currentState = wuParserState.wuDate;
+                case WU_ParserState.ForecastDay:
+                    if (XMLParserHelper.amAtTag(line, _date))
+                        m_currentState = WU_ParserState.Date;
                     else
-                        if (line.IndexOf(XMLParserHelper.startTag(_high)) >= 0)
-                            currentState = wuParserState.wuHigh;
+                        if (XMLParserHelper.amAtTag(line, _high))
+                            m_currentState = WU_ParserState.High;
                         else
-                            if (line.IndexOf(XMLParserHelper.startTag(_low)) >= 0)
-                                currentState = wuParserState.wuLow;
+                            if (XMLParserHelper.amAtTag(line, _low))
+                                m_currentState = WU_ParserState.Low;
                             else
-                                if (line.IndexOf(XMLParserHelper.startTag(_conditions)) >= 0)
-                                    wuf.condition = XMLParserHelper.getData(line, _conditions);
+                                if (XMLParserHelper.amAtTag(line, _conditions))
+                                    m_wuf.condition = XMLParserHelper.getData(line, _conditions);
                                 else
-                                    if (line.IndexOf(XMLParserHelper.startTag(_icon)) >= 0)
-                                        wuf.iconBasename = XMLParserHelper.getData(line, _icon);
+                                    if (XMLParserHelper.amAtTag(line, _icon))
+                                        m_wuf.iconBasename = XMLParserHelper.getData(line, _icon);
                                     else
-                                        if (line.IndexOf(XMLParserHelper.startTag(_maxwind)) >= 0)
-                                            currentState = wuParserState.wuMaxWind;
+                                        if (XMLParserHelper.amAtTag(line, _maxwind))
+                                            m_currentState = WU_ParserState.MaxWind;
                                         else
-                                            if (line.IndexOf(XMLParserHelper.startTag(_maxhumidity)) >= 0)
-                                                wuf.humidity = XMLParserHelper.getData(line, _maxhumidity);
+                                            if (XMLParserHelper.amAtTag(line, _maxhumidity))
+                                                m_wuf.humidity = XMLParserHelper.getData(line, _maxhumidity);
                                             else
-                                                if (line.IndexOf(XMLParserHelper.endTag(_forecastday)) >= 0)
+                                                if (XMLParserHelper.amAtEndTag(line, _forecastday))
                                                 {
-                                                    currentState = wuParserState.wuForecastDays;
-                                                    this.forecast.Add(wuf);
-                                                    wuf = new WeatherUndergroundForecast();
+                                                    m_currentState = WU_ParserState.ForecastDays;
+                                                    this.m_forecast.Add(m_wuf);
+                                                    m_wuf = new WeatherUndergroundForecast();
                                                 }
                     break;
-                case wuParserState.wuDate:
-                    if (line.IndexOf(XMLParserHelper.startTag(_weekday_short)) >= 0)
-                        wuf.dayOfWeek = XMLParserHelper.getData(line, _weekday_short);
+                case WU_ParserState.Date:
+                    if (XMLParserHelper.amAtTag(line, _weekday_short))
+                        m_wuf.dayOfWeek = XMLParserHelper.getData(line, _weekday_short);
                     else
-                        if (line.IndexOf(XMLParserHelper.endTag(_date)) >= 0)
-                            currentState = wuParserState.wuForecastDay;
+                        if (XMLParserHelper.amAtEndTag(line, _date))
+                            m_currentState = WU_ParserState.ForecastDay;
                     break;
-                case wuParserState.wuHigh:
-                    if (line.IndexOf(XMLParserHelper.startTag(_celsius)) >= 0)
-                        wuf.highTemperature = XMLParserHelper.getData(line, _celsius);
+                case WU_ParserState.High:
+                    if (XMLParserHelper.amAtTag(line, _celsius))
+                        m_wuf.highTemperature = XMLParserHelper.getData(line, _celsius);
                     else
-                        if (line.IndexOf(XMLParserHelper.endTag(_high)) >= 0)
-                            currentState = wuParserState.wuForecastDay;
+                        if (XMLParserHelper.amAtEndTag(line, _high))
+                            m_currentState = WU_ParserState.ForecastDay;
                     break;
-                case wuParserState.wuLow:
-                    if (line.IndexOf(XMLParserHelper.startTag(_celsius)) >= 0)
-                        wuf.lowTemperature = XMLParserHelper.getData(line, _celsius);
+                case WU_ParserState.Low:
+                    if (XMLParserHelper.amAtTag(line, _celsius))
+                        m_wuf.lowTemperature = XMLParserHelper.getData(line, _celsius);
                     else
-                        if (line.IndexOf(XMLParserHelper.endTag(_low)) >= 0)
-                            currentState = wuParserState.wuForecastDay;
+                        if (XMLParserHelper.amAtEndTag(line, _low))
+                            m_currentState = WU_ParserState.ForecastDay;
                     break;
-                case wuParserState.wuMaxWind:
-                    if (line.IndexOf(XMLParserHelper.startTag(_kph)) >= 0)
-                        wuf.windSpeed = XMLParserHelper.getData(line, _kph);
+                case WU_ParserState.MaxWind:
+                    if (XMLParserHelper.amAtTag(line, _kph))
+                        m_wuf.windSpeed = XMLParserHelper.getData(line, _kph);
                     else
-                        if (line.IndexOf(XMLParserHelper.startTag(_dir)) >= 0)
-                            wuf.windDir = XMLParserHelper.getData(line, _dir);
+                        if (XMLParserHelper.amAtTag(line, _dir))
+                            m_wuf.windDir = XMLParserHelper.getData(line, _dir);
                         else
-                            if (line.IndexOf(XMLParserHelper.endTag(_maxwind)) >= 0)
-                                currentState = wuParserState.wuForecastDay;
+                            if (XMLParserHelper.amAtEndTag(line, _maxwind))
+                                m_currentState = WU_ParserState.ForecastDay;
                     break;
-                case wuParserState.wuMoonPhase:
-                    if (line.IndexOf(XMLParserHelper.startTag(_percentIlluminated)) >= 0)
-                        this.astronomy.percentIlluminated = XMLParserHelper.getData(line, _percentIlluminated);
+                case WU_ParserState.MoonPhase:
+                    if (XMLParserHelper.amAtTag(line, _percentIlluminated))
+                        this.m_astronomy.percentIlluminated = XMLParserHelper.getData(line, _percentIlluminated);
                     else
-                        if (line.IndexOf(XMLParserHelper.startTag(_sunset)) >= 0)
-                            currentState = wuParserState.wuSunset;
+                        if (XMLParserHelper.amAtTag(line, _sunset))
+                            m_currentState = WU_ParserState.Sunset;
                         else
-                            if (line.IndexOf(XMLParserHelper.startTag(_sunrise)) >= 0)
-                                currentState = wuParserState.wuSunrise;
+                            if (XMLParserHelper.amAtTag(line, _sunrise))
+                                m_currentState = WU_ParserState.Sunrise;
                             else
-                                if (line.IndexOf(XMLParserHelper.endTag(_moon_phase)) >= 0)
-                                    currentState = wuParserState.wuResponse;
+                                if (XMLParserHelper.amAtEndTag(line, _moon_phase))
+                                    m_currentState = WU_ParserState.Response;
                     break;
-                case wuParserState.wuSunset:
-                    if (line.IndexOf(XMLParserHelper.startTag(_hour)) >= 0)
-                        this.astronomy.sunsetHour = XMLParserHelper.getData(line, _hour);
+                case WU_ParserState.Sunset:
+                    if (XMLParserHelper.amAtTag(line, _hour))
+                        this.m_astronomy.sunsetHour = XMLParserHelper.getData(line, _hour);
                     else
-                        if (line.IndexOf(XMLParserHelper.startTag(_minute)) >= 0)
-                            this.astronomy.sunsetMinute = XMLParserHelper.getData(line, _minute);
+                        if (XMLParserHelper.amAtTag(line, _minute))
+                            this.m_astronomy.sunsetMinute = XMLParserHelper.getData(line, _minute);
                         else
-                            if (line.IndexOf(XMLParserHelper.endTag(_sunset)) >= 0)
-                                currentState = wuParserState.wuMoonPhase;
+                            if (XMLParserHelper.amAtEndTag(line, _sunset))
+                                m_currentState = WU_ParserState.MoonPhase;
                     break;
-                case wuParserState.wuSunrise:
-                    if (line.IndexOf(XMLParserHelper.startTag(_hour)) >= 0)
-                        this.astronomy.sunriseHour = XMLParserHelper.getData(line, _hour);
+                case WU_ParserState.Sunrise:
+                    if (XMLParserHelper.amAtTag(line, _hour))
+                        this.m_astronomy.sunriseHour = XMLParserHelper.getData(line, _hour);
                     else
-                        if (line.IndexOf(XMLParserHelper.startTag(_minute)) >= 0)
-                            this.astronomy.sunriseMinute = XMLParserHelper.getData(line, _minute);
+                        if (XMLParserHelper.amAtTag(line, _minute))
+                            this.m_astronomy.sunriseMinute = XMLParserHelper.getData(line, _minute);
                         else
-                            if (line.IndexOf(XMLParserHelper.endTag(_sunrise)) >= 0)
-                                currentState = wuParserState.wuMoonPhase;
+                            if (XMLParserHelper.amAtEndTag(line, _sunrise))
+                                m_currentState = WU_ParserState.MoonPhase;
                     break;
             }
         }
@@ -346,7 +350,9 @@ namespace WeatherReporter.WeatherUnderground
                     {
                         bytesRead++;
                         if ((buffer[0] != 10))
+                        {
                             parser += (char)buffer[0];
+                        }
                         else
                         {
                             ProcessWeatherXMLLine(parser);
@@ -422,23 +428,23 @@ namespace WeatherReporter.WeatherUnderground
                 " Humidity: " + wuf.humidity + " % Wind:" + wuf.windDir + " " + wuf.windSpeed + "K/h");
         }
 
-        private void __ShowWeather()
+        private void showWeather()
         {
-            string[] vect = new string[] { "City      : " + this.current.city,
-                                           "Conditions: " + this.current.condition,
+            string[] vect = new string[] { "City    :" + this.m_current.city,
+                                           "Cond.   :" + this.m_current.condition,
                                            #if USE_FDEGREES // We do not use F degrees so supress it
-                                           "Temp.     : " + this.current.TempF.ToString() + " F",
+                                           "Temp.   :" + this.m_current.TempF.ToString() + " F",
                                            #else
-                                           "Temp.     : " + this.current.temperature + " C",
+                                           "Temp.   :" + this.m_current.temperature + " C",
                                            #endif
-                                           "Humidity  : " + this.current.humidity + " %", // Google set the value as Humidity: value
-                                           "Icon      : " + this.current.iconBasename,
-                                           "Wind      : " + this.current.windDir + " " + this.current.windSpeed + "kph",
-                                           "Pressure  : " + this.current.pressure + "mb",
-                                           "Moon      : " + this.astronomy.percentIlluminated + " %",
-                                           "Sunrise   : " + this.astronomy.sunriseHour + ":" + this.astronomy.sunriseMinute,
-                                           "Sunset    : " + this.astronomy.sunsetHour + ":" + this.astronomy.sunsetMinute,
-                                           "Time      : " + DateTime.Now.ToString() };
+                                           "Humidity:" + this.m_current.humidity + " %", // Google set the value as Humidity: value
+                                           "Icon    :" + this.m_current.iconBasename,
+                                           "Wind    :" + this.m_current.windDir + " " + this.m_current.windSpeed + "kph",
+                                           "Pressure:" + this.m_current.pressure + "mb",
+                                           "Moon    :" + this.m_astronomy.percentIlluminated + " %",
+                                           "Sunrise :" + this.m_astronomy.sunriseHour + ":" + this.m_astronomy.sunriseMinute,
+                                           "Sunset  :" + this.m_astronomy.sunsetHour + ":" + this.m_astronomy.sunsetMinute,
+                                           "Time    :" + DateTime.Now.ToString() };
 
             for (int i = 0; i < vect.Length; i++)
             {
@@ -446,18 +452,18 @@ namespace WeatherReporter.WeatherUnderground
                     Debug.Print(vect[i]);
             }
 
-            for (int i = 0; i < this.forecast.Count; i++)
-                ShowForecastData((WeatherUndergroundForecast)forecast[i]);
+            for (int i = 0; i < this.m_forecast.Count; i++)
+                ShowForecastData((WeatherUndergroundForecast)m_forecast[i]);
 
-            Debug.Print("=-=-=-=-=-=");
+            Debug.Print("=-=-=-=");
         }
 
         public void Show()
         {
-            if (this.current.city == null)
+            if (this.m_current.city == null)
                 return;
 
-            __ShowWeather();
+            showWeather();
             GC.WaitForPendingFinalizers();
             Debug.GC(true);
         }
@@ -482,27 +488,26 @@ namespace WeatherReporter.WeatherUnderground
 
         public void Serialize(SerialDisplay sd)
         {
-            if (this.current.city == null)
+            if (this.m_current.city == null)
                 return;
             string[] vect = new string[] {
-                "[IC" + this.current.city + "]",
-                "[CC" + this.current.condition + "]",
-                "[CT" + this.current.temperature + "]",
-                "[CH" + this.current.humidity + "]",
-                "[CI" + this.current.iconBasename + "]",
-                "[CW" + this.current.windDir + " " + this.current.windSpeed + "kph]",
-                "[CR" + this.astronomy.sunriseHour + ":" + this.astronomy.sunriseMinute + "]",
-                "[CS" + this.astronomy.sunsetHour + ":" + this.astronomy.sunsetMinute + "]",
-                "[CM" + this.astronomy.percentIlluminated.ToString() + "]",
-                "[CP" + this.current.pressure + "]"
+                "[IC" + this.m_current.city + "]",
+                "[CC" + this.m_current.condition + "]",
+                "[CT" + this.m_current.temperature + "]",
+                "[CH" + this.m_current.humidity + "]",
+                "[CI" + this.m_current.iconBasename + "]",
+                "[CW" + this.m_current.windDir + " " + this.m_current.windSpeed + "kph]",
+                "[CR" + this.m_astronomy.sunriseHour + ":" + this.m_astronomy.sunriseMinute + "]",
+                "[CS" + this.m_astronomy.sunsetHour + ":" + this.m_astronomy.sunsetMinute + "]",
+                "[CM" + this.m_astronomy.percentIlluminated.ToString() + "]",
+                "[CP" + this.m_current.pressure + "]"
             };
             int i;
 
             for (i = 0; i < vect.Length; i++)
                 sd.SerializeString(vect[i]);
-            for (i = 0; i < this.forecast.Count; i++)
-                SerailizeForecastData(sd, i, (WeatherUndergroundForecast)this.forecast[i]);
+            for (i = 0; i < this.m_forecast.Count; i++)
+                SerailizeForecastData(sd, i, (WeatherUndergroundForecast)this.m_forecast[i]);
         }
     }
 }
-
